@@ -1,12 +1,19 @@
+This is a personal modification of the original which can be found here--->  https://github.com/Dustify/SdrSharpPocsagPlugin
+
 # Screenshot
 
-![POCSAG decoder](https://i.imgur.com/WJaRTUd.png)
+![POCSAG decoder](https://i.imgur.com/oCPOA15.jpeg)
 
 # Installation
 
 Extract the 'SdrSharpPocsagPlugin' folder in the release zip into the SDR# 'Plugins' directory.
 
 ![Plugin directory](https://i.imgur.com/5i2CYyo.png)
+
+# My current release
+
+Current release has a zip archive that can be extracted into the 'Plugins' directory of SDR#.
+https://github.com/Daniel-D-F-Rushton/SdrSharpPocsagPlugin-Personal-Modification/releases/tag/ddfr1
 
 # Build from source
 
@@ -24,6 +31,7 @@ NFM with 12kHz bandwidth seems to work reliably, input is taken directly from th
 
 ### De-duplicate
 The payload of each message is hashed (ignoring the first 9 characters, which seem to often include time data). With this option enabled new messages received with the same hash will be ignored.
+A second method of checking if characters 30-40 exist in known messages.
 
 ### Hide bad decodes
 Any messages that have failed BCH (CRC) or parity checks will be ignored.
@@ -43,6 +51,5 @@ Will remove all messages from the buffer.
 
 # Notes
 
-* A maximum of 1000 messages will be displayed in the buffer, on a first-in-first-out basis.
-* If a message payload is empty it is assumed to be tone message.
-* If a message payload has fewer than 16 characters numerically, it is assumed to be a numeric message. In this case the numeric decode will be displayed first with the alphanumeric decode following e.g. "123456 (ALPHA: ABC)"
+* A maximum of 25 messages will be displayed in the buffer, on a first-in-first-out basis.
+* If a message is less tha 50 character it is dropped.
