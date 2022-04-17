@@ -5,6 +5,7 @@
     using System.ComponentModel;
     using System.Windows.Forms;
     using System.Linq;
+    using System.IO;
 
     public partial class PocsagControl : UserControl
     {
@@ -159,6 +160,16 @@
                             int lastIndex = this.dataGridView1.RowCount - 1;
 
                             this.bindingList.Add(message);
+                            
+                            // Create a datetime named file and record messages as they come in.
+                            DateTime FileName = DateTime.Now;
+                            if (Directory.Exists(".\\POCSAG") == false) Directory.CreateDirectory(".\\POCSAG\\");
+                            if (File.Exists($".\\POCSAG\\{FileName.Year}{FileName.Month}{FileName.Day}.txt") == false)
+                            {
+                                File.Create($".\\POCSAG\\{FileName.Year}{FileName.Month}{FileName.Day}.txt").Close();
+                            }
+                            File.AppendAllText($".\\POCSAG\\{FileName.Year}{FileName.Month}{FileName.Day}.txt", message.Payload + "\r\n");
+
 
                             while (this.bindingList.Count > 1000)
                             {
