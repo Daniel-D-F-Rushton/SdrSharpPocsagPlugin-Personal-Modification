@@ -159,6 +159,19 @@
                             int lastVisible = (firstDisplayed + displayed) - 1;
                             int lastIndex = this.dataGridView1.RowCount - 1;
 
+                            if (message.Payload.Length < 50) return;
+
+                            for (int i = 0; i < bindingList.Count; i++)
+                            {
+                                // Check to see if a random 10 characters exist in the messages currently stored in the list (another duplication protection)
+                                if (bindingList[i].Payload.Contains(message.Payload.Substring(30, 10)))
+                                {
+                                    // If it does, don't add it to our list.
+                                    return;
+                                }
+                            }
+
+
                             this.bindingList.Add(message);
                             
                             // Create a datetime named file and record messages as they come in.
