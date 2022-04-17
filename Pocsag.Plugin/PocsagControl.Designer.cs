@@ -98,6 +98,7 @@ namespace Pocsag.Plugin
             this.FrameIndex.Name = "FrameIndex";
             this.FrameIndex.ReadOnly = true;
             this.FrameIndex.Width = 89;
+            this.FrameIndex.Visible = false;
             // 
             // Address
             // 
@@ -106,6 +107,7 @@ namespace Pocsag.Plugin
             this.Address.Name = "Address";
             this.Address.ReadOnly = true;
             this.Address.Width = 74;
+            this.Address.Visible = false;
             // 
             // Function
             // 
@@ -114,6 +116,7 @@ namespace Pocsag.Plugin
             this.Function.Name = "Function";
             this.Function.ReadOnly = true;
             this.Function.Width = 79;
+            this.Function.Visible = false;
             // 
             // Bps
             // 
@@ -122,6 +125,7 @@ namespace Pocsag.Plugin
             this.Bps.Name = "Bps";
             this.Bps.ReadOnly = true;
             this.Bps.Width = 52;
+            this.Bps.Visible = false;
             // 
             // HasBchErrorText
             // 
@@ -130,6 +134,7 @@ namespace Pocsag.Plugin
             this.HasBchErrorText.Name = "HasBchErrorText";
             this.HasBchErrorText.ReadOnly = true;
             this.HasBchErrorText.Width = 89;
+            this.HasBchErrorText.Visible = false;
             // 
             // HasParityErrorText
             // 
@@ -138,6 +143,7 @@ namespace Pocsag.Plugin
             this.HasParityErrorText.Name = "HasParityErrorText";
             this.HasParityErrorText.ReadOnly = true;
             this.HasParityErrorText.Width = 95;
+            this.HasParityErrorText.Visible = false;
             // 
             // ErrorsCorrected
             // 
@@ -146,6 +152,7 @@ namespace Pocsag.Plugin
             this.ErrorsCorrected.Name = "ErrorsCorrected";
             this.ErrorsCorrected.ReadOnly = true;
             this.ErrorsCorrected.Width = 107;
+            this.ErrorsCorrected.Visible = false;
             // 
             // Type
             // 
@@ -154,6 +161,7 @@ namespace Pocsag.Plugin
             this.Type.Name = "Type";
             this.Type.ReadOnly = true;
             this.Type.Width = 56;
+            this.Type.Visible = false;
             // 
             // Payload
             // 
