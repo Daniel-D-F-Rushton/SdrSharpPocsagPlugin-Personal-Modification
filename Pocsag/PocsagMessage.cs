@@ -285,13 +285,9 @@
 
                 this.Type = MessageType.AlphaNumeric;
 
-                if (numericResult.Length == 0)
+                if (numericResult.Length < 50)
                 {
-                    this.Payload = "";
-                    this.Type = MessageType.Tone;
-                }
-                else if (numericResult.Length < 16)
-                {
+                    this.HasBchError = true;        // force drop - don't care about these.
                     this.Payload = $"{numericResult} (ALPHA: {this.Payload})";
                     this.Type = MessageType.Numeric;
                 }
