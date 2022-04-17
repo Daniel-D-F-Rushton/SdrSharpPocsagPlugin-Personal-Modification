@@ -133,6 +133,33 @@
                };
         }
 
+        private Boolean IsDuplicate(PocsagMessage message)
+        {
+             for (int i = 0; i < bindingList.Count; i++)
+             {
+                // Check to see if a random 10 characters exist in the messages currently stored in the list (another duplication protection)
+                if (bindingList[i].Payload.Contains(message.Payload.Substring(30, 10)))
+                {
+                    // If it does, don't add it to our list.
+                    return true;
+                }
+             }    
+             return false;
+        }
+
+        private void RecordMessage(PocsagMessage message)
+        {
+            // Create a datetime named file and record messages as they come in.
+            DateTime FileName = DateTime.Now;
+            if (Directory.Exists(".\\POCSAG") == false) Directory.CreateDirectory(".\\POCSAG\\");
+            if (File.Exists($".\\POCSAG\\{FileName.Year}{FileName.Month}{FileName.Day}.txt") == false)
+            {
+                File.Create($".\\POCSAG\\{FileName.Year}{FileName.Month}{FileName.Day}.txt").Close();
+            }
+            File.AppendAllText($".\\POCSAG\\{FileName.Year}{FileName.Month}{FileName.Day}.txt", message.Payload + "\r\n");
+        }
+            
+
         private void MessageReceived(Pocsag.PocsagMessage message)
         {
             if (this.InvokeRequired)
@@ -161,28 +188,11 @@
 
                             if (message.Payload.Length < 50) return;
 
-                            for (int i = 0; i < bindingList.Count; i++)
-                            {
-                                // Check to see if a random 10 characters exist in the messages currently stored in the list (another duplication protection)
-                                if (bindingList[i].Payload.Contains(message.Payload.Substring(30, 10)))
-                                {
-                                    // If it does, don't add it to our list.
-                                    return;
-                                }
-                            }
-
-
-                            this.bindingList.Add(message);
+                            if (IsDuplicate(message)) return;
                             
-                            // Create a datetime named file and record messages as they come in.
-                            DateTime FileName = DateTime.Now;
-                            if (Directory.Exists(".\\POCSAG") == false) Directory.CreateDirectory(".\\POCSAG\\");
-                            if (File.Exists($".\\POCSAG\\{FileName.Year}{FileName.Month}{FileName.Day}.txt") == false)
-                            {
-                                File.Create($".\\POCSAG\\{FileName.Year}{FileName.Month}{FileName.Day}.txt").Close();
-                            }
-                            File.AppendAllText($".\\POCSAG\\{FileName.Year}{FileName.Month}{FileName.Day}.txt", message.Payload + "\r\n");
+                            this.bindingList.Add(message);
 
+                            RecordMessage(message);
 
                             while (this.bindingList.Count > 25)
                             {
