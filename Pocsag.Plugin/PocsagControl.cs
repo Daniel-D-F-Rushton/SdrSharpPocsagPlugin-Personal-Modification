@@ -171,7 +171,7 @@
                             File.AppendAllText($".\\POCSAG\\{FileName.Year}{FileName.Month}{FileName.Day}.txt", message.Payload + "\r\n");
 
 
-                            while (this.bindingList.Count > 1000)
+                            while (this.bindingList.Count > 25)
                             {
                                 this.bindingList.RemoveAt(0);
                             }
